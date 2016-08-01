@@ -5,7 +5,9 @@ var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config.js");
 
 // The development server (the recommended option for development)
-gulp.task("default", ["webpack-dev-server"]);
+gulp.task("default", ["webpack:build-dev", "webpack-dev-server"], function () {
+    gulp.watch(["web/**/*"], ["webpack:build-dev"]);
+});
 
 // Build and watch cycle (another option for development)
 // Advantage: No server required, can run app from filesystem
@@ -73,8 +75,8 @@ gulp.task("webpack-dev-server", function(callback) {
         stats: {
             colors: true
         }
-    }).listen(8080, "localhost", function(err) {
+    }).listen(8081, "localhost", function(err) {
         if(err) throw new gutil.PluginError("webpack-dev-server", err);
-        gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/index.html");
+        gutil.log("[webpack-dev-server]", "http://localhost:8081/webpack-dev-server/index.html");
     });
 });

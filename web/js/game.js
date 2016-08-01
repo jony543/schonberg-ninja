@@ -18,17 +18,11 @@ var game = new Phaser.Game(w, h, Phaser.AUTO, 'game',
     { preload: preload, create: create, update: update, render: render });
 
 function preload() {
-    var bmd = game.add.bitmapData(100,100);
-    bmd.ctx.fillStyle = '#00ff00';
-    bmd.ctx.arc(50,50,50, 0, Math.PI * 2);
-    bmd.ctx.fill();
-    game.cache.addBitmapData('good', bmd);
+    game.load.crossOrigin = "Anonymous";
+    game.load.image('pic123', 'https://d3c3pv3c59yq5d.cloudfront.net/midgam_binary_rankings/images/stimuli/108.jpg');
 
-    var bmd = game.add.bitmapData(64,64);
-    bmd.ctx.fillStyle = '#ff0000';
-    bmd.ctx.arc(32,32,32, 0, Math.PI * 2);
-    bmd.ctx.fill();
-    game.cache.addBitmapData('bad', bmd);
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.physics.arcade.gravity.y = 300;
 }
 
 var good_objects,
@@ -44,16 +38,27 @@ var nextFire = 0;
 
 
 function create() {
+    var bmd = game.add.bitmapData(100,100);
+    var img = this.cache.getImage('pic123');
+    var pattern = bmd.ctx.createPattern(img, 'repeat');
+    bmd.ctx.arc(50,50,50, 0, Math.PI * 2);
+    bmd.ctx.fillStyle = pattern; // '#00ff00';
+    bmd.ctx.fill();
+    game.cache.addBitmapData('good', bmd);
 
-    game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.physics.arcade.gravity.y = 300;
+
+    var bmd = game.add.bitmapData(64,64);
+    bmd.ctx.fillStyle = '#ff0000';
+    bmd.ctx.arc(32,32,32, 0, Math.PI * 2);
+    bmd.ctx.fill();
+    game.cache.addBitmapData('bad', bmd);
 
     good_objects = createGroup(4, game.cache.getBitmapData('good'));
     bad_objects = createGroup(4, game.cache.getBitmapData('bad'));
 
     slashes = game.add.graphics(0, 0);
 
-    scoreLabel = game.add.text(10,10,'Tip: get the green ones!');
+    scoreLabel = game.add.text(10,10,'Tip: avoid the red ones!');
     scoreLabel.fill = 'white';
 
     emitter = game.add.emitter(0, 0, 300);
@@ -86,10 +91,10 @@ function throwObject() {
 
 function throwGoodObject() {
     var obj = good_objects.getFirstDead();
-    obj.reset(game.world.centerX + Math.random()*100-Math.random()*100, h);
+    obj.reset(game.world.centerX + (game.world.width/4) * (Math.random()-Math.random()), h); //(game.world.width * normalDist(), h);
     obj.anchor.setTo(0.5, 0.5);
     //obj.body.angularAcceleration = 100;
-    game.physics.arcade.moveToXY(obj, game.world.centerX, game.world.centerY, 0.88*h);
+    game.physics.arcade.moveToXY(obj, game.world.centerX, game.world.centerY, 530);
 }
 
 function throwBadObject() {
@@ -97,7 +102,7 @@ function throwBadObject() {
     obj.reset(game.world.centerX + Math.random()*100-Math.random()*100, h);
     obj.anchor.setTo(0.5, 0.5);
     //obj.body.angularAcceleration = 100;
-    game.physics.arcade.moveToXY(obj, game.world.centerX, game.world.centerY, 0.88*h);
+    game.physics.arcade.moveToXY(obj, game.world.centerX, game.world.centerY, 530);
 }
 
 function update() {
