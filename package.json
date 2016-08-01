@@ -1,0 +1,36 @@
+{
+  "name": "schonberg-ninja",
+  "version": "1.0.0",
+  "description": "Fruit Ninja web app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jony543/schonberg-ninja.git"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "Jonathan Ataria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jony543/schonberg-ninja/issues"
+  },
+  "homepage": "https://github.com/jony543/schonberg-ninja#readme",
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "phaser": "^2.6.1",
+    "script-loader": "^0.7.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.7",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  }
+}

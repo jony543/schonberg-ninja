@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fruit Ninja</title>
+
+    <style type="text/css">
+        div#content {
+            position: fixed;
+            top: 02%;
+            left: 20%;
+            bottom: 02%;
+            right: 20%;
+            min-width: 200px;
+            min-height: 200px;
+            background: black;
+        }
+
+        div#content iframe {
+            position: absolute;
+            display: block;
+            border: 0;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <iframe seamless="seamless" scrolling="no" id="gameFrame"
+                src="views/game.html"
+                width="800" height="600" allowfullscreen="true"></iframe>
+    </div>
+</body>
+</html>
